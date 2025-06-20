@@ -1,37 +1,2024 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>Jp Portifolho  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dadinho Lanches Pizzaria - Sistema de Pedidos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color:black ;
-            color: whitesmoke;
-            font-size: 20px;
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .print-area {
+            display: none;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .print-area,
+            .print-area * {
+                visibility: visible;
+            }
+
+            .print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                display: block;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
     </style>
-
 </head>
-<body background="./imagens/lQk38x.jpg">
-    <p>Bem vindo(a) ao meu Portifólio Web!</p>
-    <h1 id="cab">João Pedro Santos de Assis</h1>
-    <img src="imagens/eu.jpeg" alt="minha foto" width="200px">
-    <p>Brasileiro, Maceió - Alagoas <br>
-    Atualmente estou cursando <strong>Desenvolvimento de Web</strong> na <font color="green"><strong>Trybe</strong></font></p>
-    <p><strong> Alguns dos meus hobbies</strong></p>
-    <li> Jogar com amigos
-    <li>Futebol</li>
-    <li>Viajar</li>
-    <br>
-    <a href="https://www.instagram.com/jpedro_assis/" target="_blank"> <font color="red">Meu Instragram</font></a> <br><br>
-    <p>Gosto muito de Futebol, meu time do coração é o <font color="red"> <strong>Flamengo</strong></font> <br> <img src="imagens/fut.jpg" alt="foto do flamengo" width="300px"></p>
-    <p>Esse são alguns dos meus jogos favoritos </p><img src="imagens/warzone.jpg" alt="jogo warzone" width="700px">
-    <p><img src="imagens/9323-tibia-pc-capa-1.jpg" alt="tibia"></p>
-    <p>Uma das coisas que mais gosto de fazer é viajar <br> <img src="imagens/aviao.webp" alt="aviao" width="600px"></p>
-    <br>
-    <br>
-    <br>
-    <p id="ind"><strong>Indice</strong></p>
-    <p><a href="João Pedro Santos de Assis"></a></p>
-    <p></p>
 
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-red-600 mb-2">Dadinho Lanches Pizzaria</h1>
+            <p class="text-gray-600">Sistema de Pedidos</p>
+        </header>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Progress Steps -->
+            <div class="flex items-center justify-between px-6 py-4 bg-gray-800 text-white">
+                <div class="step flex-1 text-center relative" data-step="1">
+                    <div class="w-8 h-8 mx-auto rounded-full bg-red-600 flex items-center justify-center mb-2">1</div>
+                    <span>Produtos</span>
+                </div>
+                <div class="flex-1 h-1 bg-gray-600 mx-2"></div>
+                <div class="step flex-1 text-center relative" data-step="2">
+                    <div class="w-8 h-8 mx-auto rounded-full bg-gray-600 flex items-center justify-center mb-2">2</div>
+                    <span>Cliente</span>
+                </div>
+                <div class="flex-1 h-1 bg-gray-600 mx-2"></div>
+                <div class="step flex-1 text-center relative" data-step="3">
+                    <div class="w-8 h-8 mx-auto rounded-full bg-gray-600 flex items-center justify-center mb-2">3</div>
+                    <span>Pagamento</span>
+                </div>
+                <div class="flex-1 h-1 bg-gray-600 mx-2"></div>
+                <div class="step flex-1 text-center relative" data-step="4">
+                    <div class="w-8 h-8 mx-auto rounded-full bg-gray-600 flex items-center justify-center mb-2">4</div>
+                    <span>Resumo</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Products -->
+            <div id="step1" class="p-6 fade-in">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">Selecione seus produtos</h2>
+
+                <!-- Category Tabs -->
+                <div class="flex border-b mb-6">
+                    <button class="category-tab px-4 py-2 font-medium text-red-600 border-b-2 border-red-600"
+                        data-category="pizzas">Pizzas</button>
+                    <button class="category-tab px-4 py-2 font-medium text-gray-600"
+                        data-category="sandwiches">Sanduíches</button>
+                    <button class="category-tab px-4 py-2 font-medium text-gray-600"
+                        data-category="drinks">Refrigerantes</button>
+                </div>
+
+                <!-- Pizzas Category -->
+                <div id="pizzas" class="category-content">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3">Tamanho da Pizza</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <label class="size-option cursor-pointer">
+                                <input type="radio" name="pizza-size" value="P" class="hidden peer" data-price="30.00">
+                                <div
+                                    class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="block font-medium">Pequena (P)</span>
+                                    <span class="text-red-600 font-bold">R$ 30,00</span>
+                                </div>
+                            </label>
+                            <label class="size-option cursor-pointer">
+                                <input type="radio" name="pizza-size" value="M" class="hidden peer" data-price="40.00">
+                                <div
+                                    class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="block font-medium">Média (M)</span>
+                                    <span class="text-red-600 font-bold">R$ 40,00</span>
+                                </div>
+                            </label>
+                            <label class="size-option cursor-pointer">
+                                <input type="radio" name="pizza-size" value="G" class="hidden peer" data-price="45.00">
+                                <div
+                                    class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="block font-medium">Grande (G)</span>
+                                    <span class="text-red-600 font-bold">R$ 45,00</span>
+                                </div>
+                            </label>
+                            <label class="size-option cursor-pointer">
+                                <input type="radio" name="pizza-size" value="GG" class="hidden peer" data-price="60.00">
+                                <div
+                                    class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="block font-medium">Gigante (GG)</span>
+                                    <span class="text-red-600 font-bold">R$ 60,00</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3">Sabores (máx. 2)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Calabresa" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Calabresa</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Fragon Catupiry" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Fragon Catupiry</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Bacon" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Bacon</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Catupirela" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Catupirela</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Baiana" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Baiana</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Jardineira" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Jardineira</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Chelone" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Chelone</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Mussarela" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Mussarela</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Bolonhesa" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Bolonhesa</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Portuguesa" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Portuguesa</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Quatro Queijos" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Quatro Queijos</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Lombo" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Lombo</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Atum" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Atum</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Charque" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Charque</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Frango Com Palmito" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Frango Com Palmito</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Alagoana" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Alagoana</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="A Moda da Casa" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">A Moda da Casa</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Marguerita" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Marguerita</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Santanense" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Santanense</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Americana" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Americana</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Vegetariana" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Vegetariana</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Calabresa Paulista" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Calabresa Paulista</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Romana" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Romana</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Filé" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Filé</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Portuguesa Especial" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Portuguesa Especial</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Palmito" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Palmito</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Pizzaiolo" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Pizzaiolo</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Brigadeiro" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Brigadeiro</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Prestigio" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Prestigio</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Romeu e Julieta" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Romeu e Julieta</span>
+                                </div>
+                            </label>
+                            <label class="flavor-option cursor-pointer">
+                                <input type="checkbox" name="pizza-flavor" value="Cartola" class="hidden peer"
+                                    data-max="2">
+                                <div class="p-4 border rounded-lg peer-checked:border-red-500 peer-checked:bg-red-50">
+                                    <span class="font-medium">Cartola</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <button
+                            class="add-to-cart px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                            <i class="fas fa-plus mr-2"></i> Adicionar ao Pedido
+                        </button>
+                        <span class="text-gray-600">Selecione tamanho e até 2 sabores</span>
+                    </div>
+                </div>
+
+                <!-- Sandwiches Category -->
+                <div id="sandwiches" class="category-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Americano</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Americano" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Baurú</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 11,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Baurú" data-price="11.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Egg Burguer</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 16,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Egg Burguer" data-price="16.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Hamburguer</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 10,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Hamburguer" data-price="10.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 10,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto" data-price="10.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto Burguer</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto Burguer" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto Frango</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto Frango" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto Dog</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto Dog" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto Calabresa</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto Calabresa" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto Bacon</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto Bacon" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto Frango C/ Catupiry</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 14,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto Frango C/ Catupiry" data-price="14.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Misto C/ Catupiry</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Misto C/ Catupiry" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Tudo</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 29,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Tudo" data-price="29.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Hamburguer Artesanal</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 17,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Hamburguer Artesanal" data-price="17.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Artesanal Especial Bacon</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 21,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Artesanal Especial Bacon" data-price="21.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Artesanal Cheddar</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 21,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Artesanal Cheddar" data-price="21.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Artesanal Lombo</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Artesanal Lombo" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Artesanal Toscana</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Artesanal Toscana" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Minuano</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 13,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Minuano" data-price="13.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Sertanejo</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Sertanejo" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Bacon</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 15,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Bacon" data-price="15.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Burguer</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 13,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Burguer" data-price="13.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Calabresa</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 15,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Calabresa" data-price="15.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Com Ovo</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 15,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Com Ovo" data-price="15.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Frango</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 15,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Frango" data-price="15.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Dog</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 15,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Dog" data-price="15.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Filé</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 19,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Filé" data-price="19.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Filé de Boi</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Filé de Boi" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Picanha</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Picanha" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Alcatra</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Alcatra" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Coração</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Coração" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Calabresa Especial</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Calabresa Especial" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Frango Especial</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 20,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Frango Especial" data-price="20.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Egg Bacon</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 19,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Egg Bacon" data-price="19.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Filé Especial</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 25,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Filé Especial" data-price="25.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">X-Picanha Especial</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 25,00</span>
+                                <button
+                                    class="add-sandwich px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="X-Picanha Especial" data-price="25.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drinks Category -->
+                <div id="drinks" class="category-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Água Mineral</h3>
+                            <p class="text-gray-600 mb-3">Garrafa 500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 3,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Água Mineral" data-price="3.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Água Com Gás</h3>
+                            <p class="text-gray-600 mb-3">Garrafa 500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 4,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Água Com Gás" data-price="4.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Coca-Cola</h3>
+                            <p class="text-gray-600 mb-3">Pet 200ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 3,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Coca-Cola 1 Litro" data-price="3.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Guaraná</h3>
+                            <p class="text-gray-600 mb-3">Pet 200ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 3,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Guaraná 1 Litro" data-price="3.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Coca-Cola</h3>
+                            <p class="text-gray-600 mb-3">Lata 350ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Coca-Cola" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                                                <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Coca-Cola Zero</h3>
+                            <p class="text-gray-600 mb-3">Lata 350ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Coca-Cola Zero" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Guaraná</h3>
+                            <p class="text-gray-600 mb-3">Lata 350ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Guaraná" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Guaraná Zero</h3>
+                            <p class="text-gray-600 mb-3">Lata 350ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Guaraná Zero" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Fanta Laranja</h3>
+                            <p class="text-gray-600 mb-3">Lata 350ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Fanta Laranja" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Sprite</h3>
+                            <p class="text-gray-600 mb-3">Lata 350ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Sprite" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Sprite Zero</h3>
+                            <p class="text-gray-600 mb-3">Lata 350ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Sprite Zero" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Coca-Cola 1 Litro</h3>
+                            <p class="text-gray-600 mb-3">1 Litro</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 10,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Coca-Cola 1 Litro" data-price="10.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Coca-Cola 1,5 Litro</h3>
+                            <p class="text-gray-600 mb-3">1,5 Litros</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 12,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Coca-Cola 1 Litro" data-price="12.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Pepsi 1 Litro</h3>
+                            <p class="text-gray-600 mb-3">1 Litro</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 10,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Pepsi 1 Litro" data-price="10.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Guaraná 1 Litro</h3>
+                            <p class="text-gray-600 mb-3">1 Litro</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 10,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Guaraná 1 Litro" data-price="10.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Maracujá C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Maracujá" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Acerola C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Acerola" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Abacaxi C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Abacaxi" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Manga C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Manga" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Caju C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Caju" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Cajá C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Cajá" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Graviola C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Graviola" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Goiaba C/ Água</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 5,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Goiaba" data-price="5.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Maracujá C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Maracujá" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Acerola C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Acerola" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Abacaxi C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Abacaxi" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Manga C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Manga" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Caju C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Caju" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Cajá C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Cajá" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Graviola C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Graviola" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">Suco Goiaba C/ Leite</h3>
+                            <p class="text-gray-600 mb-3">500ml</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold">R$ 6,00</span>
+                                <button
+                                    class="add-drink px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    data-name="Suco Goiaba" data-price="6.00">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="mt-8 border-t pt-6">
+                    <h3 class="text-lg font-semibold mb-3">Seu Pedido</h3>
+                    <div id="order-items" class="mb-4">
+                        <p class="text-gray-500 italic">Nenhum item adicionado ainda</p>
+                    </div>
+                    <div class="flex justify-between items-center border-t pt-3">
+                        <span class="font-bold">Total:</span>
+                        <span id="order-total" class="font-bold text-xl text-red-600">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-6">
+                    <button id="next-to-step2"
+                        class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>
+                        Próximo <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Customer Info -->
+            <div id="step2" class="p-6 hidden">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">Informações do Cliente</h2>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Tipo de Pedido</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="order-type" value="delivery" class="hidden peer" checked>
+                            <div
+                            class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                            <i class="fas fa-motorcycle text-2xl mb-2 text-red-600"></i>
+                            <span class="block font-medium">Entrega</span>
+                            <span class="text-sm text-gray-600">+ R$ 6,00 taxa</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="order-type" value="pickup" class="hidden peer">
+                        <div
+                            class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                            <i class="fas fa-store text-2xl mb-2 text-red-600"></i>
+                            <span class="block font-medium">Retirada</span>
+                            <span class="text-sm text-gray-600">Sem taxa</span>
+                        </div>
+                    </label>
+                    </div>
+                </div>
+
+                <div id="customer-fields">
+                    <div class="mb-4">
+                        <label for="customer-name" class="block text-gray-700 font-medium mb-2">Nome do Cliente*</label>
+                        <input type="text" id="customer-name"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+
+                    <div id="delivery-fields">
+                        <div class="mb-4">
+                            <label for="customer-address" class="block text-gray-700 font-medium mb-2">Endereço*</label>
+                            <input type="text" id="customer-address"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                                required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="mb-4">
+                                <label for="customer-neighborhood"
+                                    class="block text-gray-700 font-medium mb-2">Bairro*</label>
+                                <input type="text" id="customer-neighborhood"
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                                    required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="customer-phone"
+                                    class="block text-gray-700 font-medium mb-2">Telefone*</label>
+                                <input type="tel" id="customer-phone"
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-8">
+                    <button id="back-to-step1"
+                        class="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                    </button>
+                    <button id="next-to-step3"
+                        class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>
+                        Próximo <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Payment --->
+            <div id="step3" class="p-6 hidden">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">Forma de Pagamento</h2>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Selecione o método</h3>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="cash" class="hidden peer" checked>
+                            <div
+                                class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                                <i class="fas fa-money-bill-wave text-2xl mb-2 text-red-600"></i>
+                                <span class="block font-medium">Dinheiro</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="card" class="hidden peer">
+                            <div
+                                class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                                <i class="fas fa-credit-card text-2xl mb-2 text-red-600"></i>
+                                <span class="block font-medium">Cartão</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment-method" value="pix" class="hidden peer">
+                            <div
+                                class="p-4 border rounded-lg text-center peer-checked:border-red-500 peer-checked:bg-red-50">
+                                <i class="fas fa-qrcode text-2xl mb-2 text-red-600"></i>
+                                <span class="block font-medium">PIX</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="cash-fields">
+                    <div class="mb-4">
+                        <label for="cash-received" class="block text-gray-700 font-medium mb-2">Valor Recebido*</label>
+                        <input type="number" id="cash-received" min="0" step="0.01"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Total do Pedido:</span>
+                            <span id="payment-total">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Taxa de Entrega:</span>
+                            <span id="delivery-fee">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-lg">
+                            <span>Troco:</span>
+                            <span id="change-amount">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="card-fields" class="hidden">
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Total do Pedido:</span>
+                            <span id="card-total">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Taxa de Entrega:</span>
+                            <span id="card-delivery-fee">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-lg">
+                            <span>Total a Pagar:</span>
+                            <span id="card-total-amount">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pix-fields" class="hidden">
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Total do Pedido:</span>
+                            <span id="pix-total">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Taxa de Entrega:</span>
+                            <span id="pix-delivery-fee">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-lg mb-4">
+                            <span>Total a Pagar:</span>
+                            <span id="pix-total-amount">R$ 0,00</span>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="bg-white p-4 rounded-lg inline-block mb-4">
+                                <img src="/qrcode-pix.png"
+                                    alt="QR Code PIX" class="w-32 h-32 mx-auto">
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Escaneie o QR Code para pagar via PIX</p>
+                            <p class="text-sm text-gray-600">Ou copie o código abaixo:</p>
+                            <div class="bg-white p-3 rounded-lg border mt-2">
+                                <p class="text-sm font-mono break-all">
+                                    00020126360014BR.GOV.BCB.PIX0114+55829991985185204000053039865802BR5923Olivaldo Alves de Assis6015Santana do Ipan62180514DADINHOLANCHES6304A5A7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-8">
+                    <button id="back-to-step2"
+                        class="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                    </button>
+                    <button id="next-to-step4"
+                        class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>
+                        Finalizar Pedido <i class="fas fa-check ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Order Summary -->
+            <div id="step4" class="p-6 hidden">
+                <div class="text-center mb-6">
+                    <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-800">Pedido Finalizado!</h2>
+                    <p class="text-gray-600">Obrigado por escolher a Dadinho Lanches & Pizzaria</p>
+                </div>
+
+                <!-- Printable Order Summary -->
+                <div id="printable-order" class="print-area bg-white p-6 rounded-lg border">
+                    <div class="text-center mb-4">
+                        <h3 class="text-xl font-bold">Dadinho Lanches & Pizzaria</h3>
+                        <p class="text-sm text-gray-600">Rua conego josé bulhões - Centro</p>
+                        <p class="text-sm text-gray-600">Tel: (82) 99919-8518</p>
+                    </div>
+
+                    <div class="border-t border-b py-2 my-2">
+                        <div class="flex justify-between">
+                            <span class="font-medium">Pedido #<span id="order-number">0001</span></span>
+                            <span id="order-date" class="text-gray-600"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-bold mb-2">Cliente:</h4>
+                        <p id="summary-customer-name"></p>
+                        <p id="summary-customer-address" class="text-gray-600"></p>
+                        <p id="summary-customer-phone" class="text-gray-600"></p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-bold mb-2">Itens:</h4>
+                        <div id="summary-items"></div>
+                    </div>
+
+                    <div class="border-t pt-2 mb-4">
+                        <div class="flex justify-between">
+                            <span>Subtotal:</span>
+                            <span id="summary-subtotal">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Taxa de Entrega:</span>
+                            <span id="summary-delivery-fee">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-lg">
+                            <span>Total:</span>
+                            <span id="summary-total">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-bold mb-2">Pagamento:</h4>
+                        <p id="summary-payment-method"></p>
+                        <p id="summary-change" class="text-gray-600"></p>
+                        <div id="summary-pix-info" class="hidden mt-4">
+                            <div class="bg-gray-100 p-3 rounded-lg">
+                                <p class="font-medium mb-2">Informações para pagamento via PIX:</p>
+                                <img src="/qrcode-pix.png"
+                                    alt="QR Code PIX" class="w-24 h-24 mx-auto mb-2">
+                                <p class="text-sm font-mono break-all">
+                                    00020126360014BR.GOV.BCB.PIX0114+55829991985185204000053039865802BR5923Olivaldo Alves de Assis6015Santana do Ipan62180514DADINHOLANCHES6304A5A7</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-6 text-sm text-gray-500">
+                        <p>Obrigado pela preferência!</p>
+                        <p>Volte sempre!</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-4 mt-8 no-print">
+                    <button id="back-to-step3"
+                        class="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                    </button>
+                    <button id="print-order"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-print mr-2"></i> Imprimir Pedido
+                    </button>
+                    <button id="new-order"
+                        class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                        <i class="fas fa-plus mr-2"></i> Novo Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Global variables
+            let orderItems = [];
+            let currentStep = 1;
+            let orderNumber = 1;
+
+            // DOM elements
+            const steps = document.querySelectorAll('.step');
+            const stepContents = {
+                1: document.getElementById('step1'),
+                2: document.getElementById('step2'),
+                3: document.getElementById('step3'),
+                4: document.getElementById('step4')
+            };
+
+            // Navigation buttons
+            const nextButtons = {
+                1: document.getElementById('next-to-step2'),
+                2: document.getElementById('next-to-step3'),
+                3: document.getElementById('next-to-step4')
+            };
+
+            const backButtons = {
+                2: document.getElementById('back-to-step1'),
+                3: document.getElementById('back-to-step2'),
+                4: document.getElementById('back-to-step3')
+            };
+
+            // Category tabs
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const categoryContents = document.querySelectorAll('.category-content');
+
+            // Product selection
+            const addToCartBtn = document.querySelector('.add-to-cart');
+            const addSandwichBtns = document.querySelectorAll('.add-sandwich');
+            const addDrinkBtns = document.querySelectorAll('.add-drink');
+            const orderItemsContainer = document.getElementById('order-items');
+            const orderTotalElement = document.getElementById('order-total');
+
+            // Customer info
+            const orderTypeRadios = document.querySelectorAll('input[name="order-type"]');
+            const customerNameInput = document.getElementById('customer-name');
+            const deliveryFields = document.getElementById('delivery-fields');
+            const customerAddressInput = document.getElementById('customer-address');
+            const customerNeighborhoodInput = document.getElementById('customer-neighborhood');
+            const customerPhoneInput = document.getElementById('customer-phone');
+
+            // Payment
+            const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
+            const cashFields = document.getElementById('cash-fields');
+            const cardFields = document.getElementById('card-fields');
+            const pixFields = document.getElementById('pix-fields');
+            const cashReceivedInput = document.getElementById('cash-received');
+            const paymentTotalElement = document.getElementById('payment-total');
+            const deliveryFeeElement = document.getElementById('delivery-fee');
+            const changeAmountElement = document.getElementById('change-amount');
+            const cardTotalElement = document.getElementById('card-total');
+            const cardDeliveryFeeElement = document.getElementById('card-delivery-fee');
+            const cardTotalAmountElement = document.getElementById('card-total-amount');
+            const pixTotalElement = document.getElementById('pix-total');
+            const pixDeliveryFeeElement = document.getElementById('pix-delivery-fee');
+            const pixTotalAmountElement = document.getElementById('pix-total-amount');
+
+            // Order summary
+            const printOrderBtn = document.getElementById('print-order');
+            const newOrderBtn = document.getElementById('new-order');
+            const summaryCustomerName = document.getElementById('summary-customer-name');
+            const summaryCustomerAddress = document.getElementById('summary-customer-address');
+            const summaryCustomerPhone = document.getElementById('summary-customer-phone');
+            const summaryItems = document.getElementById('summary-items');
+            const summarySubtotal = document.getElementById('summary-subtotal');
+            const summaryDeliveryFee = document.getElementById('summary-delivery-fee');
+            const summaryTotal = document.getElementById('summary-total');
+            const summaryPaymentMethod = document.getElementById('summary-payment-method');
+            const summaryChange = document.getElementById('summary-change');
+            const summaryPixInfo = document.getElementById('summary-pix-info');
+            const orderNumberElement = document.getElementById('order-number');
+            const orderDateElement = document.getElementById('order-date');
+
+            // Initialize
+            updateStepIndicator();
+            updateOrderTotal();
+
+            // Event listeners for category tabs
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Update active tab
+                    categoryTabs.forEach(t => t.classList.remove('text-red-600', 'border-red-600'));
+                    categoryTabs.forEach(t => t.classList.add('text-gray-600'));
+                    this.classList.remove('text-gray-600');
+                    this.classList.add('text-red-600', 'border-red-600');
+
+                    // Show corresponding content
+                    const category = this.getAttribute('data-category');
+                    categoryContents.forEach(content => content.classList.add('hidden'));
+                    document.getElementById(category).classList.remove('hidden');
+                });
+            });
+
+            // Event listener for pizza size selection
+            document.querySelectorAll('.size-option input').forEach(radio => {
+                radio.addEventListener('change', function () {
+                    updateAddToCartButtonState();
+                });
+            });
+
+            // Event listener for pizza flavor selection
+            document.querySelectorAll('.flavor-option input').forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const max = parseInt(this.getAttribute('data-max'));
+                    const checkedCount = document.querySelectorAll('.flavor-option input:checked').length;
+
+                    if (checkedCount > max) {
+                        this.checked = false;
+                        alert(`Você pode selecionar no máximo ${max} sabores.`);
+                    }
+
+                    updateAddToCartButtonState();
+                });
+            });
+
+            // Event listener for add pizza to cart
+            addToCartBtn.addEventListener('click', function () {
+                const selectedSize = document.querySelector('input[name="pizza-size"]:checked');
+                const selectedFlavors = Array.from(document.querySelectorAll('input[name="pizza-flavor"]:checked')).map(f => f.value);
+
+                if (!selectedSize || selectedFlavors.length === 0) {
+                    alert('Por favor, selecione um tamanho e pelo menos um sabor.');
+                    return;
+                }
+
+                const pizzaItem = {
+                    type: 'pizza',
+                    size: selectedSize.value,
+                    flavors: selectedFlavors,
+                    price: parseFloat(selectedSize.getAttribute('data-price')),
+                    quantity: 1
+                };
+
+                addToOrder(pizzaItem);
+
+                // Reset selection
+                document.querySelectorAll('.flavor-option input:checked').forEach(cb => cb.checked = false);
+                updateAddToCartButtonState();
+            });
+
+            // Event listeners for add sandwich to cart
+            addSandwichBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const sandwichItem = {
+                        type: 'sandwich',
+                        name: this.getAttribute('data-name'),
+                        price: parseFloat(this.getAttribute('data-price')),
+                        quantity: 1
+                    };
+
+                    addToOrder(sandwichItem);
+                });
+            });
+
+            // Event listeners for add drink to cart
+            addDrinkBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const drinkItem = {
+                        type: 'drink',
+                        name: this.getAttribute('data-name'),
+                        price: parseFloat(this.getAttribute('data-price')),
+                        quantity: 1
+                    };
+
+                    addToOrder(drinkItem);
+                });
+            });
+
+            // Event listeners for order type (delivery/pickup)
+            orderTypeRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    if (this.value === 'delivery') {
+                        deliveryFields.style.display = 'block';
+                        customerAddressInput.required = true;
+                        customerNeighborhoodInput.required = true;
+                        customerPhoneInput.required = true;
+                    } else {
+                        deliveryFields.style.display = 'none';
+                        customerAddressInput.required = false;
+                        customerNeighborhoodInput.required = false;
+                        customerPhoneInput.required = false;
+                    }
+
+                    updateOrderTotal();
+                    updateNextButtonState(2);
+                });
+            });
+
+            // Event listeners for customer info validation
+            customerNameInput.addEventListener('input', function () {
+                updateNextButtonState(2);
+            });
+
+            customerAddressInput.addEventListener('input', function () {
+                updateNextButtonState(2);
+            });
+
+            customerNeighborhoodInput.addEventListener('input', function () {
+                updateNextButtonState(2);
+            });
+
+            customerPhoneInput.addEventListener('input', function () {
+                updateNextButtonState(2);
+            });
+
+            // Event listeners for payment method
+            paymentMethodRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    if (this.value === 'cash') {
+                        cashFields.style.display = 'block';
+                        cardFields.style.display = 'none';
+                        pixFields.style.display = 'none';
+                    } else if (this.value === 'card') {
+                        cashFields.style.display = 'none';
+                        cardFields.style.display = 'block';
+                        pixFields.style.display = 'none';
+                    } else if (this.value === 'pix') {
+                        cashFields.style.display = 'none';
+                        cardFields.style.display = 'none';
+                        pixFields.style.display = 'block';
+                    }
+
+                    updateNextButtonState(3);
+                });
+            });
+
+            // Event listener for cash received input
+            cashReceivedInput.addEventListener('input', function () {
+                updateChangeAmount();
+                updateNextButtonState(3);
+            });
+
+            // Event listeners for navigation buttons
+            Object.entries(nextButtons).forEach(([step, button]) => {
+                button.addEventListener('click', function () {
+                    goToStep(parseInt(step) + 1);
+                });
+            });
+
+            Object.entries(backButtons).forEach(([step, button]) => {
+                button.addEventListener('click', function () {
+                    goToStep(parseInt(step) - 1);
+                });
+            });
+
+            // Event listener for print order
+            printOrderBtn.addEventListener('click', function () {
+                window.print();
+            });
+
+            // Event listener for new order
+            newOrderBtn.addEventListener('click', function () {
+                // Reset order
+                orderItems = [];
+                orderNumber++;
+
+                // Reset UI
+                document.querySelectorAll('.flavor-option input:checked').forEach(cb => cb.checked = false);
+                document.querySelectorAll('.size-option input:checked').forEach(r => r.checked = false);
+                document.querySelector('input[name="order-type"][value="delivery"]').checked = true;
+                document.querySelector('input[name="payment-method"][value="cash"]').checked = true;
+
+                customerNameInput.value = '';
+                customerAddressInput.value = '';
+                customerNeighborhoodInput.value = '';
+                customerPhoneInput.value = '';
+                cashReceivedInput.value = '';
+
+                deliveryFields.style.display = 'block';
+                cashFields.style.display = 'block';
+                cardFields.style.display = 'none';
+                pixFields.style.display = 'none';
+
+                updateOrderItemsDisplay();
+                updateOrderTotal();
+                goToStep(1);
+            });
+
+            // Functions
+            function updateStepIndicator() {
+                steps.forEach(step => {
+                    const stepNumber = parseInt(step.getAttribute('data-step'));
+                    const circle = step.querySelector('div');
+
+                    if (stepNumber < currentStep) {
+                        circle.classList.remove('bg-gray-600');
+                        circle.classList.add('bg-green-500');
+                    } else if (stepNumber === currentStep) {
+                        circle.classList.remove('bg-gray-600', 'bg-green-500');
+                        circle.classList.add('bg-red-600');
+                    } else {
+                        circle.classList.remove('bg-red-600', 'bg-green-500');
+                        circle.classList.add('bg-gray-600');
+                    }
+                });
+            }
+
+            function goToStep(step) {
+                // Hide all step contents
+                Object.values(stepContents).forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // Show current step content
+                stepContents[step].classList.remove('hidden');
+
+                // Update current step
+                currentStep = step;
+                updateStepIndicator();
+
+                // Special handling for step 4 (summary)
+                if (step === 4) {
+                    updateOrderSummary();
+                }
+            }
+
+            function updateAddToCartButtonState() {
+                const hasSize = document.querySelector('input[name="pizza-size"]:checked') !== null;
+                const hasFlavor = document.querySelector('input[name="pizza-flavor"]:checked') !== null;
+
+                addToCartBtn.disabled = !(hasSize && hasFlavor);
+            }
+
+            function addToOrder(item) {
+                // Check if item already exists in order
+                let existingItem = null;
+
+                if (item.type === 'pizza') {
+                    existingItem = orderItems.find(i =>
+                        i.type === 'pizza' &&
+                        i.size === item.size &&
+                        JSON.stringify(i.flavors) === JSON.stringify(item.flavors)
+                    );
+                } else {
+                    existingItem = orderItems.find(i =>
+                        i.type === item.type &&
+                        i.name === item.name
+                    );
+                }
+
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    orderItems.push(item);
+                }
+
+                updateOrderItemsDisplay();
+                updateOrderTotal();
+                updateNextButtonState(1);
+            }
+
+            function updateOrderItemsDisplay() {
+                if (orderItems.length === 0) {
+                    orderItemsContainer.innerHTML = '<p class="text-gray-500 italic">Nenhum item adicionado ainda</p>';
+                    return;
+                }
+
+                let html = '';
+
+                orderItems.forEach((item, index) => {
+                    html += `<div class="flex justify-between items-center py-2 border-b">
+                        <div>
+                            <span class="font-medium">`;
+
+                    if (item.type === 'pizza') {
+                        html += `Pizza ${item.size} (${item.flavors.join(' + ')})`;
+                    } else {
+                        html += item.name;
+                    }
+
+                    html += `</span>
+                            <button class="remove-item ml-2 text-red-500 hover:text-red-700" data-index="${index}">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center">
+                            <button class="decrease-quantity px-2 text-gray-500 hover:text-red-600" data-index="${index}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="increase-quantity px-2 text-gray-500 hover:text-green-600" data-index="${index}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <span class="ml-4 font-medium">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
+                        </div>
+                    </div>`;
+                });
+
+                orderItemsContainer.innerHTML = html;
+
+                // Add event listeners to new buttons
+                document.querySelectorAll('.remove-item').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        orderItems.splice(index, 1);
+                        updateOrderItemsDisplay();
+                        updateOrderTotal();
+                        updateNextButtonState(1);
+                    });
+                });
+
+                document.querySelectorAll('.decrease-quantity').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        if (orderItems[index].quantity > 1) {
+                            orderItems[index].quantity--;
+                            updateOrderItemsDisplay();
+                            updateOrderTotal();
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.increase-quantity').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        orderItems[index].quantity++;
+                        updateOrderItemsDisplay();
+                        updateOrderTotal();
+                    });
+                });
+            }
+
+            function updateOrderTotal() {
+                const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const isDelivery = document.querySelector('input[name="order-type"]:checked').value === 'delivery';
+                const deliveryFee = isDelivery ? 6 : 0;
+                const total = subtotal + deliveryFee;
+
+                orderTotalElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+                // Update payment step totals
+                paymentTotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                deliveryFeeElement.textContent = `R$ ${deliveryFee.toFixed(2).replace('.', ',')}`;
+                changeAmountElement.textContent = `R$ ${(0).toFixed(2).replace('.', ',')}`;
+
+                cardTotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                cardDeliveryFeeElement.textContent = `R$ ${deliveryFee.toFixed(2).replace('.', ',')}`;
+                cardTotalAmountElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+                pixTotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                pixDeliveryFeeElement.textContent = `R$ ${deliveryFee.toFixed(2).replace('.', ',')}`;
+                pixTotalAmountElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+                updateChangeAmount();
+            }
+
+            function updateChangeAmount() {
+                const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const isDelivery = document.querySelector('input[name="order-type"]:checked').value === 'delivery';
+                const deliveryFee = isDelivery ? 6 : 0;
+                const total = subtotal + deliveryFee;
+
+                const cashReceived = parseFloat(cashReceivedInput.value) || 0;
+                const change = cashReceived - total;
+
+                changeAmountElement.textContent = `R$ ${change.toFixed(2).replace('.', ',')}`;
+            }
+
+            function updateNextButtonState(step) {
+                let isValid = false;
+
+                if (step === 1) {
+                    isValid = orderItems.length > 0;
+                } else if (step === 2) {
+                    const isDelivery = document.querySelector('input[name="order-type"]:checked').value === 'delivery';
+                    isValid = customerNameInput.value.trim() !== '' &&
+                        (!isDelivery || (
+                            customerAddressInput.value.trim() !== '' &&
+                            customerNeighborhoodInput.value.trim() !== '' &&
+                            customerPhoneInput.value.trim() !== ''
+                        ));
+                } else if (step === 3) {
+                    const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+                    const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    const isDelivery = document.querySelector('input[name="order-type"]:checked').value === 'delivery';
+                    const deliveryFee = isDelivery ? 6 : 0;
+                    const total = subtotal + deliveryFee;
+
+                    if (paymentMethod === 'cash') {
+                        const cashReceived = parseFloat(cashReceivedInput.value) || 0;
+                        isValid = cashReceived >= total;
+                    } else {
+                        isValid = true;
+                    }
+                }
+
+                nextButtons[step].disabled = !isValid;
+            }
+
+            function updateOrderSummary() {
+                // Customer info
+                const isDelivery = document.querySelector('input[name="order-type"]:checked').value === 'delivery';
+                const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+                summaryCustomerName.textContent = customerNameInput.value;
+
+                if (isDelivery) {
+                    summaryCustomerAddress.textContent = `${customerAddressInput.value}, ${customerNeighborhoodInput.value}`;
+                } else {
+                    summaryCustomerAddress.textContent = 'Retirada no local';
+                }
+
+                summaryCustomerPhone.textContent = customerPhoneInput.value || '';
+
+                // Items
+                let itemsHtml = '';
+                orderItems.forEach(item => {
+                    itemsHtml += `<div class="flex justify-between py-1">
+                        <span>`;
+
+                    if (item.type === 'pizza') {
+                        itemsHtml += `Pizza ${item.size} (${item.flavors.join(' + ')})`;
+                    } else {
+                        itemsHtml += item.name;
+                    }
+
+                    itemsHtml += ` x${item.quantity}</span>
+                        <span>R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
+                    </div>`;
+                });
+
+                summaryItems.innerHTML = itemsHtml;
+
+                // Totals
+                const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const deliveryFee = isDelivery ? 6 : 0;
+                const total = subtotal + deliveryFee;
+
+                summarySubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                summaryDeliveryFee.textContent = `R$ ${deliveryFee.toFixed(2).replace('.', ',')}`;
+                summaryTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+                // Payment
+                if (paymentMethod === 'cash') {
+                    const cashReceived = parseFloat(cashReceivedInput.value) || 0;
+                    const change = cashReceived - total;
+
+                    summaryPaymentMethod.textContent = 'Dinheiro';
+                    summaryChange.textContent = `Valor recebido: R$ ${cashReceived.toFixed(2).replace('.', ',')} | Troco: R$ ${change.toFixed(2).replace('.', ',')}`;
+                    summaryPixInfo.classList.add('hidden');
+                } else if (paymentMethod === 'card') {
+                    summaryPaymentMethod.textContent = 'Cartão';
+                    summaryChange.textContent = '';
+                    summaryPixInfo.classList.add('hidden');
+                } else if (paymentMethod === 'pix') {
+                    summaryPaymentMethod.textContent = 'PIX';
+                    summaryChange.textContent = '';
+                    summaryPixInfo.classList.remove('hidden');
+                }
+
+                // Order number and date
+                orderNumberElement.textContent = orderNumber.toString().padStart(4, '0');
+
+                const now = new Date();
+                const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+                orderDateElement.textContent = now.toLocaleDateString('pt-BR', options);
+            }
+        });
+    </script>
 </body>
+
 </html>
