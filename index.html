@@ -90,27 +90,16 @@
 
                 <!-- Category Tabs -->
                 <div class="flex border-b mb-6">
-    <button
-        class="category-tab px-4 py-2 font-medium text-red-600 border-b-2 border-red-600"
-        data-category="pizzas">
-        Pizzas
-    </button>
-
-    <button
-        class="category-tab px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent"
-        data-category="sandwiches">
-        Sanduíches
-    </button>
-
-    <button
-        class="category-tab px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent"
-        data-category="drinks">
-        Refrigerantes
-    </button>
-            </div>
+                    <button type="button" class="category-tab px-4 py-2 font-medium text-red-600 border-b-2 border-red-600"
+                        data-category="pizzas">Pizzas</button>
+                    <button type="button" class="category-tab px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent"
+                        data-category="sandwiches">Sanduíches</button>
+                    <button type="button" class="category-tab px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent"
+                        data-category="drinks">Refrigerantes</button>
+                </div>
 
                 <!-- Pizzas Category -->
-                <div id="pizzas" class="category-content">
+                <div id="pizzas" class="category-content" style="display: block;">
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold mb-3">Tamanho da Pizza</h3>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -382,7 +371,7 @@
                 </div>
 
                 <!-- Sandwiches Category -->
-                <div id="sandwiches" class="category-content hidden">
+                <div id="sandwiches" class="category-content" style="display: none;">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div class="border rounded-lg p-4">
                             <h3 class="font-bold text-lg mb-2">Americano</h3>
@@ -740,7 +729,7 @@
                 </div>
 
                 <!-- Drinks Category -->
-                <div id="drinks" class="category-content hidden">
+                <div id="drinks" class="category-content" style="display: none;">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div class="border rounded-lg p-4">
                             <h3 class="font-bold text-lg mb-2">Água Mineral</h3>
@@ -1537,17 +1526,30 @@
 
             // Event listeners for category tabs
             categoryTabs.forEach(tab => {
-                tab.addEventListener('click', function () {
-                    // Update active tab
-                    categoryTabs.forEach(t => t.classList.remove('text-red-600', 'border-red-600'));
-                    categoryTabs.forEach(t => t.classList.add('text-gray-600'));
-                    this.classList.remove('text-gray-600');
+                tab.addEventListener('click', function (event) {
+                    event.preventDefault();
+
+                    const category = this.getAttribute('data-category');
+
+                    // Atualiza visual da aba ativa
+                    categoryTabs.forEach(t => {
+                        t.classList.remove('text-red-600', 'border-red-600');
+                        t.classList.add('text-gray-600', 'border-transparent');
+                    });
+
+                    this.classList.remove('text-gray-600', 'border-transparent');
                     this.classList.add('text-red-600', 'border-red-600');
 
-                    // Show corresponding content
-                    const category = this.getAttribute('data-category');
-                    categoryContents.forEach(content => content.classList.add('hidden'));
-                    document.getElementById(category).classList.remove('hidden');
+                    // Esconde TODAS as categorias primeiro
+                    categoryContents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+
+                    // Mostra somente a categoria clicada
+                    const selectedContent = document.getElementById(category);
+                    if (selectedContent) {
+                        selectedContent.style.display = 'block';
+                    }
                 });
             });
 
